@@ -24,13 +24,12 @@ Test the C Program for the desired output.
 # PROGRAM:
 
 ## C Program to print process ID and parent Process ID using Linux API system calls
-```C
+```
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
 int main(void)
-{	
-  	//variable to store calling function's process id
+{	//variable to store calling function's process id
 	pid_t process_id;
 	//variable to store parent function's process id
 	pid_t p_process_id;
@@ -38,14 +37,14 @@ int main(void)
 	process_id = getpid();
 	//getppid() - will return process id of parent function
 	p_process_id = getppid();
-	//printing the process ids
-	printf("The process id: %ld\n",(long)process_id);
-	printf("The process id of parent function: %ld\n",(long)p_process_id);
-	return 0; 
-}
+	printf("The process id: %d\n",process_id);
+	printf("The process id of parent function: %d\n",p_process_id);
+	return 0; }
 ```
 ## OUTPUT
-![Screenshot from 2024-04-02 14-14-12](https://github.com/RoopakCS/Linux-Process-API-fork-wait-exec/assets/139228922/3b241b28-6880-4bcf-8b5e-929da9c61aa9)
+
+![ID and Parrent](https://github.com/Aakashraj04/Linux-Process-API-fork-wait-exec-/assets/121117266/c4b360a5-d4f2-4290-914f-64f17f16c105)
+
 
 
 ## C Program to create new process using Linux API system calls fork() and exit()
@@ -53,60 +52,66 @@ int main(void)
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
-int main()
-{ 
+int main() {
     int pid;
-    pid=fork(); 
-    if(pid == 0) 
-    {
-        printf("Iam child my pid is %d\n",getpid()); 
-        printf("My parent pid is:%d\n",getppid()); 
-        exit(0);
-    } 
-    else{ 
-        printf("I am parent, my pid is %d\n",getpid()); 
-        sleep(100); 
-        exit(0);
-    } 
+    pid = fork();
+    if (pid == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid == 0) {
+        printf("I am child, my pid is %d\n", getpid());
+        printf("My parent pid is: %d\n", getppid());
+        exit(EXIT_SUCCESS);
+    }
+    else {
+        printf("I am parent, my pid is %d\n", getpid());
+        sleep(100);
+        exit(EXIT_SUCCESS);
+    }
+    return 0;
 }
-```
 
+```
 ## OUTPUT
-![image](https://github.com/RoopakCS/Linux-Process-API-fork-wait-exec/assets/139228922/249ba6b3-fea4-476f-bd73-35f964bd776c)
+
+![fort and exit](https://github.com/Aakashraj04/Linux-Process-API-fork-wait-exec-/assets/121117266/e3f3cb94-05c3-4e20-abe3-8d9d67826265)
+
+
 
 ## C Program to execute Linux system commands using Linux API system calls exec() family
 ```c
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
-int main()
-{       
-    int status;
-    printf("Running ps with execlp\n");
-    execl("ps", "ps", "ax", NULL);
-    wait(&status);
-    if (WIFEXITED(status))
-            printf("child exited with status of %d\n", WEXITSTATUS(status));
-    else
-            puts("child did not exit successfully\n");
-    printf("Done.\n");
-    printf("Running ps with execlp. Now with path specified\n");
-    execl("/bin/ps", "ps", "ax", NULL);
-    wait(&status);
-    if (WIFEXITED(status))
-            printf("child exited with status of %d\n", WEXITSTATUS(status));
-    else
-            puts("child did not exit successfully\n");
-    printf("Done.\n");
-    exit(0);
+int main() {
+    pid_t pid = fork();
+    if (pid < 0) {
+        perror("Fork failed");
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) {
+        printf("This is the child process. Executing 'ls' command.\n");
+        execl("/bin/ls", "ls", "-l", NULL); // Lists files in long format
+        perror("execl failed");
+        exit(EXIT_FAILURE);
+    } else {
+        int status;
+        waitpid(pid, &status, 0); // Wait for the child to finish
+        if (WIFEXITED(status)) {
+            printf("Child process exited with status %d.\n", WEXITSTATUS(status));
+        } else {
+            printf("Child process did not exit normally.\n");
+        }
+        printf("Parent process is done.\n");
+    }
+    return 0;
 }
 ```
-
 ## OUTPUT
-![image](https://github.com/RoopakCS/Linux-Process-API-fork-wait-exec/assets/139228922/a1fde8fb-7295-4219-bfde-c9d0eab06a46)
+![exec](https://github.com/Aakashraj04/Linux-Process-API-fork-wait-exec-/assets/121117266/33a2ae89-7e9d-478e-b9ad-1b6d4363d1ce)
+
 
 # RESULT:
 The programs are executed successfully.
