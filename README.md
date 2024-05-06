@@ -37,18 +37,47 @@ int main(void)
 	process_id = getpid();
 	//getppid() - will return process id of parent function
 	p_process_id = getppid();
+	//printing the process ids
+
+//printing the process ids
 	printf("The process id: %d\n",process_id);
 	printf("The process id of parent function: %d\n",p_process_id);
 	return 0; }
-```
-## OUTPUT
 
-![ID and Parrent](https://github.com/Aakashraj04/Linux-Process-API-fork-wait-exec-/assets/121117266/c4b360a5-d4f2-4290-914f-64f17f16c105)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+##OUTPUT
+
+
+
+
+<img width="611" alt="os ex2 1" src="https://github.com/Mythili7339267708/Linux-Process-API-fork-wait-exec/assets/144260246/42515cfa-59c7-4140-ad69-4e1c68ac20e9">
+
+
+
+
+
+
+
 
 
 
 ## C Program to create new process using Linux API system calls fork() and exit()
-```c
+
+
+```
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -72,15 +101,30 @@ int main() {
     return 0;
 }
 
-```
-## OUTPUT
 
-![fort and exit](https://github.com/Aakashraj04/Linux-Process-API-fork-wait-exec-/assets/121117266/e3f3cb94-05c3-4e20-abe3-8d9d67826265)
+
+
+
+```
+
+
+##OUTPUT
+
+
+
+
+<img width="577" alt="os ex2 2" src="https://github.com/Mythili7339267708/Linux-Process-API-fork-wait-exec/assets/144260246/94e2bc3d-19f4-42ea-a119-7a94833e74ed">
+
 
 
 
 ## C Program to execute Linux system commands using Linux API system calls exec() family
-```c
+
+
+
+```
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -108,9 +152,43 @@ int main() {
     }
     return 0;
 }
+
+
+
+
 ```
-## OUTPUT
-![exec](https://github.com/Aakashraj04/Linux-Process-API-fork-wait-exec-/assets/121117266/33a2ae89-7e9d-478e-b9ad-1b6d4363d1ce)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##OUTPUT
+
+
+
+
+
+
+
+
+<img width="464" alt="os ex 2 3" src="https://github.com/Mythili7339267708/Linux-Process-API-fork-wait-exec/assets/144260246/7957e28c-7bc3-475f-a0f1-f9ddee9d2849">
+
+
+
+
+
+
+
+
 
 
 # RESULT:
